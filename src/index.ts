@@ -21,6 +21,7 @@ const SWServiceFactory = (): ISWService => {
   let __debugMode: boolean = false;
 
   // service worker's registration
+  let __registration: ServiceWorkerRegistration | undefined;
   let __worker: ServiceWorker | undefined;
   let __registrationError: string | undefined;
   const __registrationDurationSeconds: number = 5;
@@ -57,6 +58,10 @@ const SWServiceFactory = (): ISWService => {
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register(path, { scope: '/' })
         .then((registration: ServiceWorkerRegistration) => {
+          // keep a copy of the registration
+          __registration = registration;
+
+          // populate the worker based on its state
           let serviceWorker: ServiceWorker | undefined;
           if (registration.installing) {
             if (__debugMode) console.log('Event Fired: serviceWorker.registration.installing', registration);
@@ -94,6 +99,30 @@ const SWServiceFactory = (): ISWService => {
     }
   };
 
+  /**
+   * Attempts to update the Service Worker safely if it was successfully registered. More info:
+   * https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerRegistration/update
+   * @returns Promise<void>
+   */
+  const __updateServiceWorker = async (): Promise<void> => {
+    if (__registration) {
+      try {
+        await __registration.update();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  /**
+   * Attempts to update the Service Worker (if it was registered) and then reloads the app.
+   * @returns Promise<void>
+   */
+  const updateApp = async (): Promise<void> => {
+    await __updateServiceWorker();
+    window.location.reload();
+  };
+
 
 
 
@@ -103,6 +132,9 @@ const SWServiceFactory = (): ISWService => {
    ********************************************************************************************** */
   return Object.freeze({
     // properties
+    get registration() {
+      return __registration;
+    },
     get worker() {
       return __worker;
     },
@@ -120,6 +152,7 @@ const SWServiceFactory = (): ISWService => {
 
     // actions
     register,
+    updateApp,
   });
 };
 
@@ -147,6 +180,7 @@ export {
   type IBeforeInstallPromptEvent,
 
   // service worker singleton
-  SWService,
+  type ISWService,
   type ISWRegistrationOptions,
+  SWService,
 };

@@ -10,6 +10,7 @@ import { IAppInstallerService } from './app-installer/types.js';
  */
 interface ISWService {
   // properties
+  registration: ServiceWorkerRegistration | undefined;
   worker: ServiceWorker | undefined;
   registrationError: string | undefined;
   registrationDurationSeconds: number;
@@ -19,6 +20,7 @@ interface ISWService {
 
   // service worker registration
   register(options?: ISWRegistrationOptions): void;
+  updateApp(): Promise<void>,
 }
 
 /**

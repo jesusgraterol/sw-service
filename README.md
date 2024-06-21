@@ -40,12 +40,18 @@ SWService.register({
 Trigger the PWA Installer:
 
 ```typescript
-if (SWService.installer && SWService.installer.canAppBeInstalled()) {
+if (SWService.installer?.canAppBeInstalled()) {
   SWService.installer.installApp();
 }
 ```
 
+<br/>
 
+Update the Service Worker and refresh the app:
+
+```typescript
+SWService.updateApp();
+```
 
 <br/>
 
