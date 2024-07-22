@@ -30,7 +30,7 @@ Register the Service Worker:
 
 ```typescript
 SWService.register({ 
-  path: 'sw.js',
+  path: '/sw.js',
   debugMode: true 
 });
 ```

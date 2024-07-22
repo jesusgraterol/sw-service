@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { encodeError, extractMessage } from 'error-message-utils';
 import { ERRORS } from './shared/errors.js';
 import {
@@ -50,7 +51,7 @@ const SWServiceFactory = (): ISWService => {
    * - SW_NO_BROWSER_SUPPORT: if the browser doesn't support service workers
    * - EMPTY_SW_REGISTRATION: if the service worker's registration is empty for an unknown reason
    */
-  const register = ({ path = 'sw.js', debugMode = false }: ISWRegistrationOptions = {}): void => {
+  const register = ({ path = '/sw.js', debugMode = false }: ISWRegistrationOptions = {}): void => {
     // set the debug mode
     __debugMode = debugMode;
 
