@@ -1,4 +1,4 @@
-# SW Service
+# Service Worker Service
 
 The `sw-service` package streamlines the registration of Service Workers on client devices, simplifying the process of delivering enhanced functionality and offline capabilities through Progressive Web Apps. This package offers a user-friendly approach to managing PWA installations, providing a seamless experience for both developers and end users.
 
