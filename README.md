@@ -15,20 +15,16 @@ For an example on how to implement this package, visit [uipalettes](https://gith
 
 Install the package:
 ```bash
-$ npm install -S sw-service
+npm install -S sw-service
 ```
 
-
-
-
-
-</br>
-
-## Usage
+### Usage
 
 Register the Service Worker:
 
 ```typescript
+import { SWService } from 'sw-service';
+
 SWService.register({ 
   path: '/sw.js',
   debugMode: true 
@@ -40,6 +36,8 @@ SWService.register({
 Trigger the PWA Installer:
 
 ```typescript
+import { SWService } from 'sw-service';
+
 if (SWService.installer?.canAppBeInstalled()) {
   SWService.installer.installApp();
 }
@@ -50,6 +48,8 @@ if (SWService.installer?.canAppBeInstalled()) {
 Update the Service Worker and refresh the app:
 
 ```typescript
+import { SWService } from 'sw-service';
+
 SWService.updateApp();
 ```
 
@@ -68,13 +68,13 @@ SWService.updateApp();
 
 ```bash
 # E2E Tests
-$ npm run test:e2e
+npm run test:e2e
 
 # Integration Tests
-$ npm run test:integration
+npm run test:integration
 
 # Unit Tests
-$ npm run test:unit
+npm run test:unit
 ```
 
 
@@ -93,42 +93,21 @@ $ npm run test:unit
 
 <br/>
 
-## Acknowledgments
-
-- [MDN](https://developer.mozilla.org/en-US/)
-- [web.dev](https://web.dev/)
-- [PWA Builder](https://www.pwabuilder.com/)
-
-
-
-<br/>
-
-## @TODOS
-
-- [ ] Write the tests
-- [ ] Improve the docs
-
-
-
-
-
-<br/>
-
 ## Deployment
 
 Install dependencies:
 ```bash
-$ npm install
+npm install
 ```
 
 
 Build the library:
 ```bash
-$ npm start
+npm start
 ```
 
 
 Publish to `npm`:
 ```bash
-$ npm publish
+npm publish
 ```
