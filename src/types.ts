@@ -28,7 +28,7 @@ interface ISWService {
  * The options that can be passed when registering the Service Worker.
  */
 interface ISWRegistrationOptions {
-  // the path to the service worker file
+  // the path to the service worker file. Defaults to: '/sw.js'
   path?: string;
 
   // enables debug mode in the service worker, as well as the rest of the sub modules

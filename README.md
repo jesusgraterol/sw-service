@@ -53,6 +53,102 @@ import { SWService } from 'sw-service';
 SWService.updateApp();
 ```
 
+
+
+
+
+<br/>
+
+## Types
+
+<details>
+  <summary><code>IAppInstallerService</code></summary>
+  
+  The service in charge of managing the PWA's Installation process.
+  ```typescript
+  interface IAppInstallerService {
+    // properties
+    installationPromptOutcome: IInstallationPromptOutcome | undefined;
+    appInstalled: boolean | undefined;
+    runningInstalledApp: boolean;
+
+    // actions
+    canAppBeInstalled: () => boolean;
+    installApp: () => Promise<void>;
+  }
+  ```
+</details>
+
+<br/>
+
+<details>
+  <summary><code>IInstallationPromptOutcome</code></summary>
+  
+  The action taken by the user once the installation prompt is displayed.
+  ```typescript
+  type IInstallationPromptOutcome = 'accepted' | 'dismissed';
+  ```
+</details>
+
+<br/>
+
+<details>
+  <summary><code>IUserChoice</code></summary>
+  
+  The result of the user's interaction with the installation prompt.
+  ```typescript
+  interface IUserChoice {
+    outcome: IInstallationPromptOutcome;
+    platform: string;
+  }
+  ```
+</details>
+
+<br/>
+
+<details>
+  <summary><code>ISWService</code></summary>
+  
+  The singleton that will handle the Service Worker's state as well as its functionality.
+  ```typescript
+  interface ISWService {
+    // properties
+    registration: ServiceWorkerRegistration | undefined;
+    worker: ServiceWorker | undefined;
+    registrationError: string | undefined;
+    registrationDurationSeconds: number;
+
+    // sub modules
+    installer: IAppInstallerService | undefined;
+
+    // service worker registration
+    register(options?: ISWRegistrationOptions): void;
+    updateApp(): Promise<void>,
+  }
+  ```
+</details>
+
+<br/>
+
+<details>
+  <summary><code>ISWRegistrationOptions</code></summary>
+  
+  The options that can be passed when registering the Service Worker.
+  ```typescript
+  interface ISWRegistrationOptions {
+    // the path to the service worker file. Defaults to: '/sw.js'
+    path?: string;
+
+    // enables debug mode in the service worker, as well as the rest of the sub modules
+    debugMode?: boolean;
+  }
+  ```
+</details>
+
+
+
+
+
 <br/>
 
 ## Built With
