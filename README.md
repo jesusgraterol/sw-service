@@ -155,13 +155,13 @@ SWService.updateApp();
 ## Running the Tests
 
 ```bash
-# E2E Tests
+# e2e tests
 npm run test:e2e
 
-# Integration Tests
+# integration tests
 npm run test:integration
 
-# Unit Tests
+# unit tests
 npm run test:unit
 ```
 
