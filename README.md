@@ -79,8 +79,6 @@ SWService.updateApp();
   ```
 </details>
 
-<br/>
-
 <details>
   <summary><code>IInstallationPromptOutcome</code></summary>
   
@@ -89,8 +87,6 @@ SWService.updateApp();
   type IInstallationPromptOutcome = 'accepted' | 'dismissed';
   ```
 </details>
-
-<br/>
 
 <details>
   <summary><code>IUserChoice</code></summary>
@@ -103,8 +99,6 @@ SWService.updateApp();
   }
   ```
 </details>
-
-<br/>
 
 <details>
   <summary><code>ISWService</code></summary>
@@ -127,8 +121,6 @@ SWService.updateApp();
   }
   ```
 </details>
-
-<br/>
 
 <details>
   <summary><code>ISWRegistrationOptions</code></summary>
