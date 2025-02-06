@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { encodeError } from 'error-message-utils';
 import { ERRORS } from '../shared/errors.js';
 import { IAppInstallerService, IBeforeInstallPromptEvent, IInstallationPromptOutcome } from './types.js';

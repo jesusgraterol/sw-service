@@ -27,6 +27,10 @@ import { SWService } from 'sw-service';
 
 SWService.register({ 
   path: '/sw.js',
+  options: { 
+    scope: '/',
+    updateViaCache: 'none'
+  }
   debugMode: true 
 });
 ```
@@ -130,6 +134,10 @@ SWService.updateApp();
   interface ISWRegistrationOptions {
     // the path to the service worker file. Defaults to: '/sw.js'
     path?: string;
+
+    // the options that can be passed to the Service Worker registration. Defaults to: { scope: '/' }
+    // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register#options
+    options?: RegistrationOptions;
 
     // enables debug mode in the service worker, as well as the rest of the sub modules
     debugMode?: boolean;

@@ -51,13 +51,17 @@ const SWServiceFactory = (): ISWService => {
    * - SW_NO_BROWSER_SUPPORT: if the browser doesn't support service workers
    * - EMPTY_SW_REGISTRATION: if the service worker's registration is empty for an unknown reason
    */
-  const register = ({ path = '/sw.js', debugMode = false }: ISWRegistrationOptions = {}): void => {
+  const register = ({
+    path = '/sw.js',
+    options = { scope: '/' },
+    debugMode = false,
+  }: ISWRegistrationOptions = {}): void => {
     // set the debug mode
     __debugMode = debugMode;
 
     // register the worker if the browser supports it
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(path, { scope: '/' })
+      navigator.serviceWorker.register(path, options)
         .then((registration: ServiceWorkerRegistration) => {
           // keep a copy of the registration
           __registration = registration;
