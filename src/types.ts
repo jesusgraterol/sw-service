@@ -20,7 +20,7 @@ interface ISWService {
 
   // service worker registration
   register(options?: ISWRegistrationOptions): void;
-  updateApp(): Promise<void>,
+  updateApp(): Promise<void>;
 }
 
 /**
@@ -39,13 +39,7 @@ interface ISWRegistrationOptions {
   debugMode?: boolean;
 }
 
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export type {
-  ISWService,
-  ISWRegistrationOptions,
-};
+export type { ISWService, ISWRegistrationOptions };

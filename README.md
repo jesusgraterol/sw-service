@@ -15,7 +15,7 @@ For an example on how to implement this package, visit [uipalettes](https://gith
 
 Install the package:
 ```bash
-npm install -S sw-service
+npm i -S sw-service
 ```
 
 ### Usage
@@ -67,8 +67,10 @@ SWService.updateApp();
 
 <details>
   <summary><code>IAppInstallerService</code></summary>
+  <br/>
   
   The service in charge of managing the PWA's Installation process.
+
   ```typescript
   interface IAppInstallerService {
     // properties
@@ -81,33 +83,42 @@ SWService.updateApp();
     installApp: () => Promise<void>;
   }
   ```
+  <br/>
 </details>
 
 <details>
   <summary><code>IInstallationPromptOutcome</code></summary>
+  <br/>
   
   The action taken by the user once the installation prompt is displayed.
+
   ```typescript
   type IInstallationPromptOutcome = 'accepted' | 'dismissed';
   ```
+  <br/>
 </details>
 
 <details>
   <summary><code>IUserChoice</code></summary>
+  <br/>
   
   The result of the user's interaction with the installation prompt.
+
   ```typescript
   interface IUserChoice {
     outcome: IInstallationPromptOutcome;
     platform: string;
   }
   ```
+  <br/>
 </details>
 
 <details>
   <summary><code>ISWService</code></summary>
+  <br/>
   
   The singleton that will handle the Service Worker's state as well as its functionality.
+
   ```typescript
   interface ISWService {
     // properties
@@ -124,12 +135,15 @@ SWService.updateApp();
     updateApp(): Promise<void>,
   }
   ```
+  <br/>
 </details>
 
 <details>
   <summary><code>ISWRegistrationOptions</code></summary>
+  <br/>
   
   The options that can be passed when registering the Service Worker.
+
   ```typescript
   interface ISWRegistrationOptions {
     // the path to the service worker file. Defaults to: '/sw.js'
@@ -143,6 +157,7 @@ SWService.updateApp();
     debugMode?: boolean;
   }
   ```
+  <br/>
 </details>
 
 
@@ -182,28 +197,3 @@ npm run test:unit
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-
-
-
-
-
-<br/>
-
-## Deployment
-
-Install dependencies:
-```bash
-npm install
-```
-
-
-Build the library:
-```bash
-npm start
-```
-
-
-Publish to `npm`:
-```bash
-npm publish
-```
