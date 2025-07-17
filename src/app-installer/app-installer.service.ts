@@ -1,7 +1,11 @@
 /* eslint-disable no-console */
 import { encodeError } from 'error-message-utils';
 import { ERRORS } from '../shared/errors.js';
-import { IAppInstallerService, IBeforeInstallPromptEvent, IInstallationPromptOutcome } from './types.js';
+import {
+  IAppInstallerService,
+  IBeforeInstallPromptEvent,
+  IInstallationPromptOutcome,
+} from './types.js';
 
 /* ************************************************************************************************
  *                                         IMPLEMENTATION                                         *
@@ -19,10 +23,6 @@ const appInstallerFactory = (debugMode: boolean = false): IAppInstallerService =
   let __installationPromptOutcome: IInstallationPromptOutcome | undefined;
   let __appInstalled: boolean | undefined;
   const __runningInstalledApp: boolean = window.matchMedia('(display-mode: standalone)').matches;
-
-
-
-
 
   /* **********************************************************************************************
    *                                        EVENT LISTENERS                                       *
@@ -63,10 +63,6 @@ const appInstallerFactory = (debugMode: boolean = false): IAppInstallerService =
     { once: true },
   );
 
-
-
-
-
   /* **********************************************************************************************
    *                                            ACTIONS                                           *
    ********************************************************************************************** */
@@ -75,11 +71,10 @@ const appInstallerFactory = (debugMode: boolean = false): IAppInstallerService =
    * Evaluates if the application can be installed on the device.
    * @returns boolean
    */
-  const canAppBeInstalled = (): boolean => (
-    __installationPrompt !== undefined
-    && typeof __installationPrompt.prompt === 'function'
-    && !__runningInstalledApp
-  );
+  const canAppBeInstalled = (): boolean =>
+    __installationPrompt !== undefined &&
+    typeof __installationPrompt.prompt === 'function' &&
+    !__runningInstalledApp;
 
   /**
    * Attempts to install the application on the user's device and stores the prompt's outcome.
@@ -104,13 +99,14 @@ const appInstallerFactory = (debugMode: boolean = false): IAppInstallerService =
         throw new Error(encodeError(e, ERRORS.UNKNOWN_INSTALLATION_PROMPT_ERROR));
       }
     } else {
-      throw new Error(encodeError('The app cannot be installed because the prompt event was not provided by the browser.', ERRORS.NO_APP_INSTALLER));
+      throw new Error(
+        encodeError(
+          'The app cannot be installed because the prompt event was not provided by the browser.',
+          ERRORS.NO_APP_INSTALLER,
+        ),
+      );
     }
   };
-
-
-
-
 
   /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
@@ -133,13 +129,7 @@ const appInstallerFactory = (debugMode: boolean = false): IAppInstallerService =
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
  ************************************************************************************************ */
-export {
-  appInstallerFactory,
-};
+export { appInstallerFactory };

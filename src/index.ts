@@ -27,17 +27,12 @@ const SWServiceFactory = (): ISWService => {
   let __registrationError: string | undefined;
   const __registrationDurationSeconds: number = 5;
 
-
   /* **********************************************************************************************
    *                                         SUB MODULES                                          *
    ********************************************************************************************** */
 
   // app installer
   let __installer: IAppInstallerService | undefined;
-
-
-
-
 
   /* **********************************************************************************************
    *                                           ACTIONS                                            *
@@ -61,7 +56,8 @@ const SWServiceFactory = (): ISWService => {
 
     // register the worker if the browser supports it
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(path, options)
+      navigator.serviceWorker
+        .register(path, options)
         .then((registration: ServiceWorkerRegistration) => {
           // keep a copy of the registration
           __registration = registration;
@@ -69,13 +65,16 @@ const SWServiceFactory = (): ISWService => {
           // populate the worker based on its state
           let serviceWorker: ServiceWorker | undefined;
           if (registration.installing) {
-            if (__debugMode) console.log('Event Fired: serviceWorker.registration.installing', registration);
+            if (__debugMode)
+              console.log('Event Fired: serviceWorker.registration.installing', registration);
             serviceWorker = registration.installing;
           } else if (registration.waiting) {
-            if (__debugMode) console.log('Event Fired: serviceWorker.registration.waiting', registration);
+            if (__debugMode)
+              console.log('Event Fired: serviceWorker.registration.waiting', registration);
             serviceWorker = registration.waiting;
           } else if (registration.active) {
-            if (__debugMode) console.log('Event Fired: serviceWorker.registration.active', registration);
+            if (__debugMode)
+              console.log('Event Fired: serviceWorker.registration.active', registration);
             serviceWorker = registration.active;
           }
           if (serviceWorker) {
@@ -84,7 +83,8 @@ const SWServiceFactory = (): ISWService => {
 
             // update the instance whenever the state changes
             serviceWorker.addEventListener('statechange', (e) => {
-              if (__debugMode) console.log('Event Fired: serviceWorker.registration.statechange', e);
+              if (__debugMode)
+                console.log('Event Fired: serviceWorker.registration.statechange', e);
               __worker = <ServiceWorker>e.target;
             });
 
@@ -92,7 +92,10 @@ const SWServiceFactory = (): ISWService => {
             __installer = appInstallerFactory(debugMode);
           } else {
             console.log(registration);
-            __registrationError = encodeError('The Service Worker\'s Registration is empty', ERRORS.EMPTY_SW_REGISTRATION);
+            __registrationError = encodeError(
+              "The Service Worker's Registration is empty",
+              ERRORS.EMPTY_SW_REGISTRATION,
+            );
           }
         })
         .catch((e) => {
@@ -100,7 +103,10 @@ const SWServiceFactory = (): ISWService => {
           __registrationError = extractMessage(e);
         });
     } else {
-      __registrationError = encodeError('The browser does not support Service Workers.', ERRORS.SW_NO_BROWSER_SUPPORT);
+      __registrationError = encodeError(
+        'The browser does not support Service Workers.',
+        ERRORS.SW_NO_BROWSER_SUPPORT,
+      );
     }
   };
 
@@ -127,10 +133,6 @@ const SWServiceFactory = (): ISWService => {
     await __updateServiceWorker();
     window.location.reload();
   };
-
-
-
-
 
   /* **********************************************************************************************
    *                                         MODULE BUILD                                         *
@@ -161,18 +163,10 @@ const SWServiceFactory = (): ISWService => {
   });
 };
 
-
-
-
-
 /* ************************************************************************************************
  *                                        GLOBAL INSTANCE                                         *
  ************************************************************************************************ */
 const SWService = SWServiceFactory();
-
-
-
-
 
 /* ************************************************************************************************
  *                                         MODULE EXPORTS                                         *
